@@ -26,8 +26,19 @@
             <div class="collapse navbar-collapse" id="menu-principal">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Início</a></li>
-                    {% if user.is_authenticated and user.is_staff %}
-                        <li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}">Administração</a></li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'painel' %}">Painel</a></li>
+                        {% if user.is_staff %}
+                            <li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}">Administração</a></li>
+                        {% endif %}
+                        <li class="nav-item">
+                            <form method="post" action="{% url 'logout' %}" class="d-inline">
+                                {% csrf_token %}
+                                <button class="nav-link btn btn-link">Sair</button>
+                            </form>
+                        </li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Entrar</a></li>
                     {% endif %}
                 </ul>
             </div>

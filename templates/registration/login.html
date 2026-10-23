@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block titulo %}Entrar · Controle de Empréstimos IL/UFMT{% endblock %}
+{% block conteudo %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <div class="card mt-4">
+            <div class="card-body">
+                <h1 class="h4 mb-3">Acesso restrito</h1>
+                <p class="text-secondary small">Informe sua matrícula e senha.</p>
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+                    {% endif %}
+                    <div class="mb-3">
+                        <label class="form-label" for="{{ form.username.id_for_label }}">Matrícula</label>
+                        <input type="text" name="{{ form.username.name }}" id="{{ form.username.id_for_label }}"
+                               class="form-control" autocomplete="username" required autofocus>
+                        {% if form.username.errors %}
+                            <div class="text-danger small">{{ form.username.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="{{ form.password.id_for_label }}">Senha</label>
+                        <input type="password" name="{{ form.password.name }}" id="{{ form.password.id_for_label }}"
+                               class="form-control" autocomplete="current-password" required>
+                        {% if form.password.errors %}
+                            <div class="text-danger small">{{ form.password.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <button class="btn btn-primary w-100" type="submit">Entrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

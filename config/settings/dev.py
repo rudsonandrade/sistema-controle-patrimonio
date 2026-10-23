@@ -16,7 +16,7 @@ ALLOWED_HOSTS = [
 MIDDLEWARE = [
     middleware
     for middleware in MIDDLEWARE  # noqa: F405
-    if middleware != "whitenoise.middleware.WhiteNoiseMiddleware"
+    if middleware not in {"whitenoise.middleware.WhiteNoiseMiddleware"}
 ]
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
