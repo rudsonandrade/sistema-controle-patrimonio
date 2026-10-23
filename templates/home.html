@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block titulo %}Início · Controle de Empréstimos IL/UFMT{% endblock %}
+{% block conteudo %}
+<div class="row justify-content-center">
+    <div class="col-lg-9">
+        <div class="p-4 p-md-5 bg-white border rounded-3 mb-4">
+            <span class="badge text-bg-warning mb-3">Fase 1 · Fundação do sistema</span>
+            <h1 class="display-6 fw-semibold">Controle de empréstimos e devoluções</h1>
+            <p class="lead text-secondary mb-3">
+                Base do sistema da Secretaria do Instituto de Linguagens da UFMT para registrar
+                retiradas e devoluções de chaves, controles remotos, projetores e outros materiais.
+            </p>
+            <p class="mb-0">
+                Esta versão contém apenas a estrutura inicial, a autenticação de usuários e a
+                documentação. As telas de atendimento entram nas próximas fases.
+            </p>
+        </div>
+
+        <div class="alert alert-info" role="alert">
+            <strong>Sistema ainda não operacional.</strong>
+            Não utilize esta versão para registrar empréstimos reais. O caderno físico continua
+            sendo o registro oficial até a homologação institucional.
+        </div>
+
+        <div class="row g-3">
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="h6 text-uppercase text-muted">Fase 1</h2>
+                        <p class="mb-0">Estrutura Django, usuário customizado, perfis e documentação.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="h6 text-uppercase text-muted">Próxima fase</h2>
+                        <p class="mb-0">PostgreSQL, login, permissões por perfil e testes de acesso.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="h6 text-uppercase text-muted">Administração</h2>
+                        <p class="mb-2">Acesso restrito a administradores cadastrados.</p>
+                        <a class="btn btn-sm btn-outline-dark" href="{% url 'admin:index' %}">Abrir administração</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

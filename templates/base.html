@@ -1,53 +1,59 @@
+{% load static %}
 <!doctype html>
 <html lang="pt-BR">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block titulo %}Controle de Patrimônio{% endblock %}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <meta name="description" content="Sistema de controle de empréstimos e devoluções do Instituto de Linguagens da UFMT.">
+    <title>{% block titulo %}Controle de Empréstimos · IL/UFMT{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand fw-semibold" href="{{ url_for('index') }}">
-            <i class="bi bi-box-seam me-1"></i>Controle de Patrimônio
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="menu">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Painel</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('bens') }}">Bens</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('movimentacoes') }}">Movimentações</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('categorias') }}">Categorias</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('locais') }}">Locais</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<a class="visually-hidden-focusable p-2 bg-white text-dark" href="#conteudo">Pular para o conteúdo principal</a>
 
-<main class="container my-4">
-    {% with mensagens = get_flashed_messages(with_categories=true) %}
-        {% if mensagens %}
-            {% for categoria, mensagem in mensagens %}
-                <div class="alert alert-{{ categoria }} alert-dismissible fade show" role="alert">
-                    {{ mensagem }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Navegação principal">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="{% url 'home' %}">
+                Controle de Empréstimos <span class="fw-normal opacity-75">· IL/UFMT</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#menu-principal" aria-controls="menu-principal"
+                    aria-expanded="false" aria-label="Abrir menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menu-principal">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Início</a></li>
+                    {% if user.is_authenticated and user.is_staff %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}">Administração</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main id="conteudo" class="container py-4">
+    {% if messages %}
+        {% for mensagem in messages %}
+            <div class="alert alert-{{ mensagem.tags|default:'info' }} alert-dismissible fade show" role="alert">
+                {{ mensagem }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
 
     {% block conteudo %}{% endblock %}
 </main>
 
-<footer class="text-center text-muted py-4 small">
-    Sistema de Controle de Patrimônio &middot; {{ hoje[:4] }}
+<footer class="border-top mt-5 py-4">
+    <div class="container small text-muted">
+        Sistema em desenvolvimento · Secretaria do Instituto de Linguagens · UFMT
+    </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'vendor/bootstrap/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>

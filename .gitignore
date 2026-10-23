@@ -1,7 +1,36 @@
+# Ambiente virtual
 venv/
+.venv/
+env/
+
+# Python
 __pycache__/
-*.pyc
-*.db
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Django
+*.log
+db.sqlite3
+staticfiles/
+media/
+patrimonio.db
+
+# Configuração e segredos locais
 .env
+.env.*
+!.env.example
+
+# Editores e sistema
 .idea/
 .vscode/
+*.swp
+Thumbs.db
+desktop.ini
+
+# Backups locais
+backups/
+*.dump
+*.sql.gz

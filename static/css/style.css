@@ -1,12 +1,55 @@
-.stat-card {
-    border: 1px solid rgba(0, 0, 0, .08);
-    border-radius: .75rem;
+:root {
+    --cor-institucional: #1f3a5f;
+    --cor-destaque: #0d6efd;
 }
 
-.table > :not(caption) > * > * {
-    padding: .75rem;
+body {
+    background-color: #f4f6f8;
+    color: #1d2733;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
 }
 
 .navbar-brand {
-    letter-spacing: -.02em;
+    letter-spacing: -0.01em;
+}
+
+.card {
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid #ffbf47;
+    outline-offset: 2px;
+}
+
+.skip-link {
+    position: absolute;
+    left: -999px;
+}
+
+.skip-link:focus {
+    left: 1rem;
+    top: 1rem;
+    z-index: 1080;
+}
+
+@media print {
+    nav, footer, .btn {
+        display: none !important;
+    }
+
+    body {
+        background: #fff;
+    }
 }
