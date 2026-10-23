@@ -1,0 +1,12 @@
+.stat-card {
+    border: 1px solid rgba(0, 0, 0, .08);
+    border-radius: .75rem;
+}
+
+.table > :not(caption) > * > * {
+    padding: .75rem;
+}
+
+.navbar-brand {
+    letter-spacing: -.02em;
+}
